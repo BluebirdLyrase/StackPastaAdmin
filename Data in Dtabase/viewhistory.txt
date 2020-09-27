@@ -1,0 +1,299 @@
+
+    {
+        "_id" : ObjectId("5f3d2cfaa0de9b62e0552f49"),
+        "Tags" : [ 
+            "http", 
+            "google-chrome", 
+            "google-chrome-devtools"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "How to use Chrome&#39;s network debugger with redirects",
+        "Site":"stackoverflow","ID" : "10987453",
+        "Date" : ISODate("2020-08-19T20:45:30.131Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3d2e380c36405868fa8b3a"),
+        "Tags" : [ 
+            "http", 
+            "google-chrome", 
+            "google-chrome-devtools"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "How to use Chrome&#39;s network debugger with redirects",
+        "Site":"stackoverflow","ID" : "10987453",
+        "Date" : ISODate("2020-08-19T20:50:48.371Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3d2e3d0c36405868fa8b3b"),
+        "Tags" : [ 
+            "android", 
+            "location", 
+            "location-provider"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "Android Location Providers - GPS or Network Provider?",
+        "Site":"stackoverflow","ID" : "6775257",
+        "Date" : ISODate("2020-08-19T20:50:53.236Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3d2f2212efcd6968780689"),
+        "Tags" : [ 
+            "java", 
+            "spring", 
+            "jsp", 
+            "date", 
+            "spring-mvc"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "How to get current date in spring form of jsp page",
+        "Site":"stackoverflow","ID" : "39808940",
+        "Date" : ISODate("2020-08-19T20:54:42.404Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3d2fe212efcd696878068d"),
+        "Tags" : [ 
+            "java", 
+            "javascript", 
+            "jodatime"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "Using Joda DateTime on the backend, how do I convert to a JavaScript Date object?",
+        "Site":"stackoverflow","ID" : "7471439",
+        "Date" : ISODate("2020-08-19T20:57:54.113Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3d88a3de6ef215701611d3"),
+        "Tags" : [ 
+            "python", 
+            "assert", 
+            "assertions"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "What is the use of &quot;assert&quot; in Python?",
+        "Site":"stackoverflow","ID" : "5142418",
+        "Date" : ISODate("2020-08-20T03:16:34.948Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3fdeaf6204e42ec4d358e5"),
+        "Tags" : [ 
+            "java", 
+            "c++", 
+            "performance", 
+            "optimization", 
+            "branch-prediction"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "Why is processing a sorted array faster than processing an unsorted array?",
+        "Site":"stackoverflow","ID" : "11227809",
+        "Date" : ISODate("2020-08-21T21:48:15.149Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3fdecb6204e42ec4d358e6"),
+        "Tags" : [ 
+            "java", 
+            "javabeans", 
+            "serializable"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "What is a JavaBean exactly?",
+        "Site":"stackoverflow","ID" : "3295496",
+        "Date" : ISODate("2020-08-21T21:48:43.533Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3fdfa16204e42ec4d358e9"),
+        "Tags" : [ 
+            "python", 
+            "scikit-learn", 
+            "process", 
+            "multiprocessing", 
+            "sleep"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "Multiprocessing machine learning code never ends",
+        "Site":"stackoverflow","ID" : "58707912",
+        "Date" : ISODate("2020-08-21T21:52:17.884Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3fdfa46204e42ec4d358ea"),
+        "Tags" : [ 
+            "python", 
+            "scikit-learn", 
+            "tpot", 
+            "automl"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "Auto-Machine-Learning python equivalent code",
+        "Site":"stackoverflow","ID" : "48064517",
+        "Date" : ISODate("2020-08-21T21:52:20.119Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f40059216f70d6c582ca96e"),
+        "Tags" : [ 
+            "twitter", 
+            "unicode", 
+            "compression"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "Twitter image encoding challenge",
+        "Site":"stackoverflow","ID" : "891643",
+        "Date" : ISODate("2020-08-22T00:34:10.677Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f40dcea0ca6092e24252089"),
+        "Tags" : [ 
+            "http", 
+            "google-chrome", 
+            "google-chrome-devtools"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "How to use Chrome&#39;s network debugger with redirects",
+        "Site":"stackoverflow","ID" : "10987453",
+        "Date" : ISODate("2020-08-22T15:52:58.207Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f40de80e4d9360d3455a149"),
+        "Tags" : [ 
+            "javascript", 
+            "node.js", 
+            "mongodb", 
+            "mongoose"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "Mongoose - saving user _id to a different Schema changes the ID",
+        "Site":"stackoverflow","ID" : "47222213",
+        "Date" : ISODate("2020-08-22T15:59:44.745Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f40df91e4d9360d3455a14c"),
+        "Tags" : [ 
+            "android", 
+            "multithreading", 
+            "android-asynctask"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "NetworkOnMainThreadException when I change HTTP to HTTPS in AsyncTask or Thread",
+        "Site":"stackoverflow","ID" : "29035924",
+        "Date" : ISODate("2020-08-22T16:04:17.313Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f43447ee1c95d4df45de874"),
+        "Tags" : [ 
+            "javascript", 
+            "function", 
+            "syntax", 
+            "idioms"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "var functionName = function() {} vs function functionName() {}",
+        "Site":"stackoverflow","ID" : "336859",
+        "Date" : ISODate("2020-08-24T11:39:26.417Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f4344a3e1c95d4df45de875"),
+        "Tags" : [ 
+            "android", 
+            "multithreading", 
+            "android-asynctask"
+        ],
+        "UserID" : "AmornInw",
+        "Title" : "NetworkOnMainThreadException when I change HTTP to HTTPS in AsyncTask or Thread",
+        "Site":"stackoverflow","ID" : "29035924",
+        "Date" : ISODate("2020-08-24T11:40:03.076Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f46812058a58a1150c98c65"),
+        "Tags" : [ 
+            "java", 
+            "json", 
+            "optimization", 
+            "csv"
+        ],
+        "UserID" : "Pisit",
+        "Title" : "Reading data from an API",
+        "Site":"stackoverflow","ID" : "18264620",
+        "Date" : ISODate("2020-08-26T22:34:56.809Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f46820c58a58a1150c98c67"),
+        "Tags" : [ 
+            "java", 
+            "json", 
+            "jsonobject"
+        ],
+        "UserID" : "Pisit",
+        "Title" : "Json Data Decode In Java",
+        "Site":"stackoverflow","ID" : "25457474",
+        "Date" : ISODate("2020-08-26T22:38:52.703Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f46824258a58a1150c98c69"),
+        "Tags" : [ 
+            "java", 
+            "datetime"
+        ],
+        "UserID" : "Pisit",
+        "Title" : "How to get the current date and time",
+        "Site":"stackoverflow","ID" : "2010284",
+        "Date" : ISODate("2020-08-26T22:39:46.557Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f5872d680feb13b9039c0bc"),
+        "Tags" : [ 
+            "c", 
+            "unit-testing", 
+            "testing", 
+            "embedded"
+        ],
+        "UserID" : "Pisit",
+        "Title" : "Unit Testing C Code",
+        "Site":"stackoverflow","ID" : "65820",
+        "Date" : ISODate("2020-09-09T06:14:46.450Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f58731db5b47d43649262f7"),
+        "Tags" : [ 
+            "php", 
+            "mongodb", 
+            "codeigniter"
+        ],
+        "UserID" : "Pisit",
+        "Title" : "Convert String to array without using explode in php",
+        "Site":"stackoverflow","ID" : "28230834",
+        "Date" : ISODate("2020-09-09T06:15:57.241Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f5b2a1cd6f7994504ae2b3c"),
+        "Tags" : [ 
+            "c++", 
+            "boost", 
+            "state-machine", 
+            "boost-statechart", 
+            "boost-msm"
+        ],
+        "UserID" : "Pisit",
+        "Title" : "Boost Statechart vs. Meta State Machine",
+        "Site":"stackoverflow","ID" : "4275602",
+        "Date" : ISODate("2020-09-11T07:41:16.423Z"),
+        "__v" : 0
+    }

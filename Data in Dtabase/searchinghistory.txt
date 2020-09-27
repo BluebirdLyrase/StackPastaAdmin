@@ -1,0 +1,155 @@
+
+    {
+        "_id" : ObjectId("5f3d2f2612efcd696878068a"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "",
+        "Sort By" : "relevance",
+        "UserID" : "AmornInw",
+        "Search Text" : "Space-X",
+        "Date" : ISODate("2020-08-19T20:54:46.411Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3d2fcd12efcd696878068b"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "",
+        "Sort By" : "relevance",
+        "UserID" : "AmornInw",
+        "Search Text" : "how to canvert java date to javascript",
+        "Date" : ISODate("2020-08-19T20:57:33.569Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3d2fdd12efcd696878068c"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "",
+        "Sort By" : "relevance",
+        "UserID" : "AmornInw",
+        "Search Text" : "java Datetime to javascript",
+        "Date" : ISODate("2020-08-19T20:57:49.850Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f3fdf9b6204e42ec4d358e8"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "Python",
+        "Sort By" : "relevance",
+        "UserID" : "AmornInw",
+        "Search Text" : "machine learning coding",
+        "Date" : ISODate("2020-08-21T21:52:11.768Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f4003b216f70d6c582ca96c"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "",
+        "Sort By" : "relevance",
+        "UserID" : "AmornInw",
+        "Search Text" : "Twitter image encoding challenge",
+        "Date" : ISODate("2020-08-22T00:26:10.415Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f40daecd4217c5b543175a9"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "",
+        "Sort By" : "relevance",
+        "UserID" : "AmornInw",
+        "Search Text" : "moongoose edit json",
+        "Date" : ISODate("2020-08-22T15:44:28.225Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f40df75e4d9360d3455a14a"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "",
+        "Sort By" : "relevance",
+        "UserID" : "AmornInw",
+        "Search Text" : "NetworkOnMainThreadException when I change HTTP to HTTPS in AsyncTask or Thread",
+        "Date" : ISODate("2020-08-22T16:03:49.254Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f424cf68618f55ff86ea7e6"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "",
+        "Sort By" : "relevance",
+        "UserID" : "AmornInw",
+        "Search Text" : "ssdsdsd",
+        "Date" : ISODate("2020-08-23T18:03:18.098Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f4344e8e1c95d4df45de876"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "",
+        "Sort By" : "relevance",
+        "UserID" : "AmornInw",
+        "Search Text" : "Date date = new Date();",
+        "Date" : ISODate("2020-08-24T11:41:12.015Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f46805458a58a1150c98c62"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "java",
+        "Sort By" : "relevance",
+        "UserID" : "Pisit",
+        "Search Text" : "How to get Date",
+        "Date" : ISODate("2020-08-26T22:31:31.553Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f46811458a58a1150c98c64"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "java",
+        "Sort By" : "relevance",
+        "UserID" : "Pisit",
+        "Search Text" : "read data from API",
+        "Date" : ISODate("2020-08-26T22:34:43.995Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f46820958a58a1150c98c66"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "Java",
+        "Sort By" : "relevance",
+        "UserID" : "Pisit",
+        "Search Text" : "Read Json data from API",
+        "Date" : ISODate("2020-08-26T22:38:49.206Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f46824058a58a1150c98c68"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "java",
+        "Sort By" : "relevance",
+        "UserID" : "Pisit",
+        "Search Text" : "How to get current date",
+        "Date" : ISODate("2020-08-26T22:39:44.613Z"),
+        "__v" : 0
+    }
+    {
+        "_id" : ObjectId("5f58731bb5b47d43649262f6"),
+        "Order" : "ASC",
+        "Site" : "stackoverflow",
+        "Tagged" : "",
+        "Sort By" : "relevance",
+        "UserID" : "Pisit",
+        "Search Text" : "String to Data in mongoDb",
+        "Date" : ISODate("2020-09-09T06:15:55.368Z"),
+        "__v" : 0
+    }
