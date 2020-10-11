@@ -3,6 +3,7 @@ const viewHistory = require('./models/viewHistory')
 const searchingHistory = require('./models/searchingHistory')
 const user = require('./models/user');
 // #5 Change URL to your local mongodb
+const bcrypt = require('bcrypt');
 const url = "mongodb://localhost:27017/StackOverFlowDB";
 // ===============================
 
@@ -86,20 +87,27 @@ function addViewHistory(req, res) {
 }
 
 function addUser(req, res) {
-    //TODO encryption
+
     var newId = new mongoose.mongo.ObjectId();
     var payload = req.body;
     payload._id = newId; // add _id
-    
-    var NewUser = new user(payload);
-    console.log(NewUser);
-    NewUser.save(function (err) {
-        if (err) {
-            res.status(500).json(err);
-        } else {
-            res.json({ status: "added NewUser" });
-        }
+
+    const saltRounds = 10;
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(payload.Password, salt, function(err, hash) {
+            payload.Password = hash;
+            var NewUser = new user(payload);
+            console.log(NewUser);
+            NewUser.save(function (err) {
+                if (err) {
+                    res.status(500).json(err);
+                } else {
+                    res.json({ status: "added NewUser" });
+                }
+            });
+        });
     });
+
 }
 
 
@@ -310,6 +318,7 @@ function searchingFrequency(req,res){
     }
     res.json(data);
 })} 
+
 
 module.exports = {
     //get
