@@ -6,7 +6,7 @@ const user = require('./models/user');
 const bcrypt = require('bcrypt');
 const url = "mongodb://localhost:27017/StackOverFlowDB";
 // ===============================
-
+const saltRounds = 10;
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 
 //get Data
@@ -39,7 +39,7 @@ function getAllUser(req, res) {
 
 function getOneUser(req, res) {
     var ID = req.params.id;
-    user.findOne({_id:ID}, function (err, data) {
+    user.findOne({ _id: ID }, function (err, data) {
         if (err) {
             res.status(500).json({ status: "error", message: err });
         }
@@ -92,9 +92,7 @@ function addUser(req, res) {
     var payload = req.body;
     payload._id = newId; // add _id
 
-    const saltRounds = 10;
-    bcrypt.genSalt(saltRounds, function(err, salt) {
-        bcrypt.hash(payload.Password, salt, function(err, hash) {
+    bcrypt.hash(payload.Password, saltRounds, function(err, hash) {
             payload.Password = hash;
             var NewUser = new user(payload);
             console.log(NewUser);
@@ -104,7 +102,6 @@ function addUser(req, res) {
                 } else {
                     res.json({ status: "added NewUser" });
                 }
-            });
         });
     });
 
@@ -144,7 +141,7 @@ function findUser(req, res) {
     var userID = req.params.userid;
     //check if that UserID is already exist
     user.findOne({ UserID: userID }, function (err, data) {
-        console.log('sent '+userID)
+        console.log('sent ' + userID)
         if (data != null) {
             console.log('Dupe')
             res.json(true);
@@ -156,27 +153,34 @@ function findUser(req, res) {
 }
 
 function editUser(req, res) {
-    //TODO encryption
+
     var payload = req.body
-    var id = req.params.id; 
-    console.log(payload) 
-    user.findByIdAndUpdate(id,payload,function (err) {
-        if (err) res.status(500).json(err);
-        res.json({status : "updated user"});
-    });
+    var id = req.params.id;
+
+    bcrypt.hash(payload.Password, saltRounds, function(err, hash) {
+            payload.Password = hash;
+
+            console.log(payload)
+            user.findByIdAndUpdate(id, payload, function (err) {
+                if (err) res.status(500).json(err);
+                res.json({ status: "updated user" });
+            });
+
+        });
+
 }
 
 function addDefaultAdmin(req, res) {
 
-    user.findOne({ type: "admin" }, function (err, data) { 
+    user.findOne({ type: "admin" }, function (err, data) {
         if (data == null) {
-
-            var newId = new mongoose.mongo.ObjectId(); 
+            bcrypt.hash("admin", saltRounds, function(err, hash) {
+            var newId = new mongoose.mongo.ObjectId();
             var NewUser = new user({
-                _id : newId,
-                UserID : "admin",
-                Password : "admin",
-                type : "admin"
+                _id: newId,
+                UserID: "admin",
+                Password: hash,
+                type: "admin"
             });
             console.log(NewUser);
             NewUser.save(function (err) {
@@ -186,8 +190,8 @@ function addDefaultAdmin(req, res) {
                     res.json({ status: "added default admin" });
                 }
             });
-
-        }else{
+        });
+        } else {
             res.json({ status: "already have admin" });
         }
     });
@@ -228,7 +232,7 @@ function checkConnection(req, res) {
 
 function authenAdmin(req, res) {
     //TODO Verification
-    user.findOne({ UserID: req.body.UserID, Password: req.body.Password,type:"admin" }, function (err, data) {
+    user.findOne({ UserID: req.body.UserID, Password: req.body.Password, type: "admin" }, function (err, data) {
         console.log(req)
         if (err) {
             res.status(500).json({ status: "error", message: err });
@@ -243,23 +247,24 @@ function authenAdmin(req, res) {
 }
 
 //Dashboard
-function distinctTags(req,res){
+function distinctTags(req, res) {
     viewHistory.aggregate([
-        { $unwind: "$Tags" }, 
-        { $group: { "_id": "$Tags", "count": { $sum: 1 } } }, 
+        { $unwind: "$Tags" },
+        { $group: { "_id": "$Tags", "count": { $sum: 1 } } },
         { $project: { "Tags": "$_id", "count": 1 } },
-        { $sort:{"count":-1}},
+        { $sort: { "count": -1 } },
 
-],        function(err,data) {
-    if (err) {
-        res.status(500).json({ status: "error", message: err });
-    }
-    res.json(data);
-})}
+    ], function (err, data) {
+        if (err) {
+            res.status(500).json({ status: "error", message: err });
+        }
+        res.json(data);
+    })
+}
 
 function findViewByUser(req, res) {
     var userID = req.params.userid;
-        viewHistory.find({ UserID: userID }, function (err, data) {
+    viewHistory.find({ UserID: userID }, function (err, data) {
         if (err) {
             res.status(500).json({ status: "error", message: err });
         }
@@ -267,25 +272,26 @@ function findViewByUser(req, res) {
     });
 }
 
-function distinctTagsByUser(req,res){
+function distinctTagsByUser(req, res) {
     var userID = req.params.userid;
     viewHistory.aggregate([
         { $match: { UserID: userID } },
-        { $unwind: "$Tags" }, 
-        { $group: { "_id": "$Tags", "count": { $sum: 1 } } }, 
+        { $unwind: "$Tags" },
+        { $group: { "_id": "$Tags", "count": { $sum: 1 } } },
         { $project: { "Tags": "$_id", "count": 1 } },
-        { $sort:{"count":-1}},
+        { $sort: { "count": -1 } },
 
-],        function(err,data) {
-    if (err) {
-        res.status(500).json({ status: "error", message: err });
-    }
-    res.json(data);
-})}
+    ], function (err, data) {
+        if (err) {
+            res.status(500).json({ status: "error", message: err });
+        }
+        res.json(data);
+    })
+}
 
 function findSearchingByUser(req, res) {
     var userID = req.params.userid;
-        searchingHistory.find({ UserID: userID }, function (err, data) {
+    searchingHistory.find({ UserID: userID }, function (err, data) {
         if (err) {
             res.status(500).json({ status: "error", message: err });
         }
@@ -293,31 +299,41 @@ function findSearchingByUser(req, res) {
     });
 }
 
-function viewFrequency(req,res){
+function viewFrequency(req, res) {
     viewHistory.aggregate([
-        { $group: { "_id": {
-            month : {$month : "$Date"},
-            year : {$year : "$Date"}
-            }, "count": { $sum: 1 } } }, 
-        { $sort:{"_id.month":1}}],        function(err,data) {
-    if (err) {
-        res.status(500).json({ status: "error", message: err });
-    }
-    res.json(data);
-})}
+        {
+            $group: {
+                "_id": {
+                    month: { $month: "$Date" },
+                    year: { $year: "$Date" }
+                }, "count": { $sum: 1 }
+            }
+        },
+        { $sort: { "_id.month": 1 } }], function (err, data) {
+            if (err) {
+                res.status(500).json({ status: "error", message: err });
+            }
+            res.json(data);
+        })
+}
 
-function searchingFrequency(req,res){
+function searchingFrequency(req, res) {
     searchingHistory.aggregate([
-        { $group: { "_id": {
-            month : {$month : "$Date"},
-            year : {$year : "$Date"}
-            }, "count": { $sum: 1 } } }, 
-        { $sort:{"_id.month":1}}],        function(err,data) {
-    if (err) {
-        res.status(500).json({ status: "error", message: err });
-    }
-    res.json(data);
-})} 
+        {
+            $group: {
+                "_id": {
+                    month: { $month: "$Date" },
+                    year: { $year: "$Date" }
+                }, "count": { $sum: 1 }
+            }
+        },
+        { $sort: { "_id.month": 1 } }], function (err, data) {
+            if (err) {
+                res.status(500).json({ status: "error", message: err });
+            }
+            res.json(data);
+        })
+}
 
 
 module.exports = {
@@ -332,7 +348,7 @@ module.exports = {
     addUser: addUser,
     findUser: findUser,
     editUser: editUser,
-    addDefaultAdmin:addDefaultAdmin,
+    addDefaultAdmin: addDefaultAdmin,
     //Delete
     deleteViewHistory: deleteViewHistory,
     deleteSearchingHistory: deleteSearchingHistory,
@@ -342,10 +358,10 @@ module.exports = {
     checkConnection: checkConnection,
     authenAdmin: authenAdmin,
     //Dash Board
-    distinctTags:distinctTags,
-    findViewByUser:findViewByUser,
-    findSearchingByUser:findSearchingByUser,
-    distinctTagsByUser:distinctTagsByUser,
+    distinctTags: distinctTags,
+    findViewByUser: findViewByUser,
+    findSearchingByUser: findSearchingByUser,
+    distinctTagsByUser: distinctTagsByUser,
     viewFrequency: viewFrequency,
-    searchingFrequency:searchingFrequency
+    searchingFrequency: searchingFrequency
 };
