@@ -232,14 +232,20 @@ function checkConnection(req, res) {
 
 function authenAdmin(req, res) {
     //TODO Verification
-    user.findOne({ UserID: req.body.UserID, Password: req.body.Password, type: "admin" }, function (err, data) {
-        console.log(req)
+    user.findOne({ UserID: req.body.UserID,type: "admin" }, function (err, data) {
+        // console.log(req)
         if (err) {
             res.status(500).json({ status: "error", message: err });
         }
-        console.log(data)
+        // console.log(data)
         if (data != null) {
-            res.json(true);
+            bcrypt.compare(req.body.Password, data.Password , function(err, result) {
+                          console.log(req.body.Password);
+                console.log(data.Password);
+                console.log(result);
+                res.json(result);
+            });
+
         } else {
             res.json(false);
         }

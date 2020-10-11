@@ -12,10 +12,14 @@ $("#loginBtn").click(function () {
           type: 'POST',
           data: authen,
           success: function (result) {
+            console.log(result)
             if(result){
             sessionStorage.setItem("userID",sUserID);
             sessionStorage.setItem("password",sPassword);
             window.location.href = sessionStorage.getItem("session");
+            
+           }else{
+             alert("Incorrect UserID or Password")
            }
           }
         });
