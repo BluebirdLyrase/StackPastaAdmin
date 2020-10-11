@@ -86,6 +86,7 @@ function addViewHistory(req, res) {
 }
 
 function addUser(req, res) {
+    //TODO encryption
     var newId = new mongoose.mongo.ObjectId();
     var payload = req.body;
     payload._id = newId; // add _id
@@ -147,6 +148,7 @@ function findUser(req, res) {
 }
 
 function editUser(req, res) {
+    //TODO encryption
     var payload = req.body
     var id = req.params.id; 
     console.log(payload) 
@@ -190,6 +192,7 @@ function addDefaultAdmin(req, res) {
 //Connection and authen
 
 function authen(req, res) {
+    //TODO Verification
     user.findOne({ UserID: req.body.UserID, Password: req.body.Password }, function (err, data) {
         console.log(req)
         if (err) {
@@ -216,6 +219,7 @@ function checkConnection(req, res) {
 }
 
 function authenAdmin(req, res) {
+    //TODO Verification
     user.findOne({ UserID: req.body.UserID, Password: req.body.Password,type:"admin" }, function (err, data) {
         console.log(req)
         if (err) {
