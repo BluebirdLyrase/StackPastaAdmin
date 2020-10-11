@@ -5,7 +5,7 @@ $(function () {
   // Get data when first time open
   $.get(url, function (data, status) {
     if (status == 'success') {
-      console.log(data);
+      // console.log(data);
       $(data).ready(function () {
         //set most tag card
         var most;
@@ -16,9 +16,9 @@ $(function () {
           obj_tag = obj.Tags;
           alltag = alltag.concat(obj_tag);
         }
-        console.log(obj_tag);
+        // console.log(obj_tag);
         most = getMostFrequentElement(alltag);
-        console.log(most);
+        // console.log(most);
         $("#most_tag").text(most[0]);
 
         //end of set tag
@@ -44,7 +44,7 @@ $(function () {
   // Get data when first time open
   $.get(url, function (data, status) {
     if (status == 'success') {
-      console.log(data);
+      // console.log(data);
       $(data).ready(function () {
 
         var most;
@@ -56,9 +56,9 @@ $(function () {
           allsite = allsite.concat(obj_site);
 
         }
-        console.log(allsite);
+        // console.log(allsite);
         most = getMostFrequentElement(allsite);
-        console.log(most);
+        // console.log(most);
         $("#most_site").text(most[0]);
 
       });
@@ -79,7 +79,7 @@ $(function () {
   $.get(url, function (data, status) {
     if (status == 'success') {
 
-      console.log(data);
+      // console.log( data);
       $(data).ready(function () {
         $('#most_user').text(data.length)
         for (var i = 0; i < data.length; i++) {
