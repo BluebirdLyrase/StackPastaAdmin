@@ -100,6 +100,8 @@ router.get('/searchingFrequency',api.searchingFrequency)
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
+router.post('/addPin',api.addPin);
+
 app.use('/api', cors(), router);
 
 // #10 Start the server

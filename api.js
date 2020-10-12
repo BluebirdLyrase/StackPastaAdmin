@@ -1,7 +1,8 @@
-const mongoose = require('mongoose')
-const viewHistory = require('./models/viewHistory')
-const searchingHistory = require('./models/searchingHistory')
+const mongoose = require('mongoose');
+const viewHistory = require('./models/viewHistory');
+const searchingHistory = require('./models/searchingHistory');
 const user = require('./models/user');
+const pinnedQuestions = require('./models/pinnedQuestions');
 // #5 Change URL to your local mongodb
 const bcrypt = require('bcrypt');
 const url = "mongodb://localhost:27017/StackOverFlowDB";
@@ -126,15 +127,6 @@ function deleteViewHistory(req, res) {
     });
 }
 
-function deleteUser(req, res) {
-    var id = req.params.id;
-    user.findByIdAndRemove(id, function (err) {
-        if (err) res.status(500).json(err);
-        res.json({ status: "delete a data" });
-    });
-    // ===============================
-}
-
 //User Management
 
 function findUser(req, res) {
@@ -196,10 +188,16 @@ function addDefaultAdmin(req, res) {
         }
     });
 
-
-
 }
 
+function deleteUser(req, res) {
+    var id = req.params.id;
+    user.findByIdAndRemove(id, function (err) {
+        if (err) res.status(500).json(err);
+        res.json({ status: "delete a data" });
+    });
+    // ===============================
+}
 
 //Connection and authen
 
@@ -344,6 +342,26 @@ function searchingFrequency(req, res) {
         })
 }
 
+//Pinned function
+function addPin(req,res){
+
+    var newId = new mongoose.mongo.ObjectId();
+    var payload = req.body; // add _id
+    payload._id = newId;
+    payload.Date = new Date(payload.Date)
+    console.log(payload);
+    var NewPinnedQuestions = new pinnedQuestions(payload);
+    console.log(NewPinnedQuestions);
+    NewPinnedQuestions.save(function (err) {
+        if (err) {
+            res.status(500).json(err);
+            console.log(err);
+        }
+        res.json({ status: "added NewPinnedQuestions" });
+    });
+
+}
+
 
 module.exports = {
     //get
@@ -351,17 +369,18 @@ module.exports = {
     getAllSearchingHistory: getAllSearchingHistory,
     getAllUser: getAllUser,
     getOneUser: getOneUser,
-    //add
+    //add History
     addViewHistory: addViewHistory,
     addSearchingHistory: addSearchingHistory,
+    //User 
     addUser: addUser,
     findUser: findUser,
     editUser: editUser,
     addDefaultAdmin: addDefaultAdmin,
-    //Delete
+    deleteUser: deleteUser,
+    //Delete History
     deleteViewHistory: deleteViewHistory,
     deleteSearchingHistory: deleteSearchingHistory,
-    deleteUser: deleteUser,
     //Connecting
     authen: authen,
     checkConnection: checkConnection,
@@ -372,5 +391,7 @@ module.exports = {
     findSearchingByUser: findSearchingByUser,
     distinctTagsByUser: distinctTagsByUser,
     viewFrequency: viewFrequency,
-    searchingFrequency: searchingFrequency
+    searchingFrequency: searchingFrequency,
+    //Pinned Function
+    addPin:addPin
 };
