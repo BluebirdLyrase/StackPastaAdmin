@@ -362,6 +362,17 @@ function addPin(req,res){
 
 }
 
+function getPinned(req,res){
+
+    pinnedQuestions.find({}, function (err, data) {
+        if (err) {
+            res.status(500).json({ status: "error", message: err });
+        }
+        res.json(data);
+    });
+
+}
+
 
 module.exports = {
     //get
@@ -393,5 +404,6 @@ module.exports = {
     viewFrequency: viewFrequency,
     searchingFrequency: searchingFrequency,
     //Pinned Function
-    addPin:addPin
+    addPin:addPin,
+    getPinned:getPinned
 };

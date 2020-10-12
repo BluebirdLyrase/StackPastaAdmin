@@ -101,6 +101,9 @@ router.get('/searchingFrequency',api.searchingFrequency)
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 router.post('/addPin',api.addPin);
+router.get('/getPinned',api.getPinned);
+
+
 
 app.use('/api', cors(), router);
 

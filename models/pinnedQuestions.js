@@ -6,6 +6,7 @@ const pinnedQuestions = new Schema({
     ID:  String,
     Title: String,
     Site: String,
+    pinText:String,
     Date: Date,
     UserID: String
   })
