@@ -93,16 +93,16 @@ function addUser(req, res) {
     var payload = req.body;
     payload._id = newId; // add _id
 
-    bcrypt.hash(payload.Password, saltRounds, function(err, hash) {
-            payload.Password = hash;
-            var NewUser = new user(payload);
-            console.log(NewUser);
-            NewUser.save(function (err) {
-                if (err) {
-                    res.status(500).json(err);
-                } else {
-                    res.json({ status: "added NewUser" });
-                }
+    bcrypt.hash(payload.Password, saltRounds, function (err, hash) {
+        payload.Password = hash;
+        var NewUser = new user(payload);
+        console.log(NewUser);
+        NewUser.save(function (err) {
+            if (err) {
+                res.status(500).json(err);
+            } else {
+                res.json({ status: "added NewUser" });
+            }
         });
     });
 
@@ -149,16 +149,16 @@ function editUser(req, res) {
     var payload = req.body
     var id = req.params.id;
 
-    bcrypt.hash(payload.Password, saltRounds, function(err, hash) {
-            payload.Password = hash;
+    bcrypt.hash(payload.Password, saltRounds, function (err, hash) {
+        payload.Password = hash;
 
-            console.log(payload)
-            user.findByIdAndUpdate(id, payload, function (err) {
-                if (err) res.status(500).json(err);
-                res.json({ status: "updated user" });
-            });
-
+        console.log(payload)
+        user.findByIdAndUpdate(id, payload, function (err) {
+            if (err) res.status(500).json(err);
+            res.json({ status: "updated user" });
         });
+
+    });
 
 }
 
@@ -166,23 +166,23 @@ function addDefaultAdmin(req, res) {
 
     user.findOne({ type: "admin" }, function (err, data) {
         if (data == null) {
-            bcrypt.hash("admin", saltRounds, function(err, hash) {
-            var newId = new mongoose.mongo.ObjectId();
-            var NewUser = new user({
-                _id: newId,
-                UserID: "admin",
-                Password: hash,
-                type: "admin"
+            bcrypt.hash("admin", saltRounds, function (err, hash) {
+                var newId = new mongoose.mongo.ObjectId();
+                var NewUser = new user({
+                    _id: newId,
+                    UserID: "admin",
+                    Password: hash,
+                    type: "admin"
+                });
+                console.log(NewUser);
+                NewUser.save(function (err) {
+                    if (err) {
+                        res.status(500).json(err);
+                    } else {
+                        res.json({ status: "added default admin" });
+                    }
+                });
             });
-            console.log(NewUser);
-            NewUser.save(function (err) {
-                if (err) {
-                    res.status(500).json(err);
-                } else {
-                    res.json({ status: "added default admin" });
-                }
-            });
-        });
         } else {
             res.json({ status: "already have admin" });
         }
@@ -211,9 +211,9 @@ function authen(req, res) {
         // console.log(data)
         if (data != null) {
 
-            bcrypt.compare(req.body.Password, data.Password , function(err, result) {
-            console.log(result);
-            res.json(result);
+            bcrypt.compare(req.body.Password, data.Password, function (err, result) {
+                console.log(result);
+                res.json(result);
             });
 
         } else {
@@ -235,14 +235,14 @@ function checkConnection(req, res) {
 
 function authenAdmin(req, res) {
     //TODO Verification
-    user.findOne({ UserID: req.body.UserID,type: "admin" }, function (err, data) {
+    user.findOne({ UserID: req.body.UserID, type: "admin" }, function (err, data) {
         // console.log(req)
         if (err) {
             res.status(500).json({ status: "error", message: err });
         }
         // console.log(data)
         if (data != null) {
-            bcrypt.compare(req.body.Password, data.Password , function(err, result) {
+            bcrypt.compare(req.body.Password, data.Password, function (err, result) {
                 console.log(result);
                 res.json(result);
             });
@@ -343,8 +343,7 @@ function searchingFrequency(req, res) {
 }
 
 //Pinned function
-function addPin(req,res){
-
+function addPin(req, res) {
     var newId = new mongoose.mongo.ObjectId();
     var payload = req.body; // add _id
     payload._id = newId;
@@ -359,18 +358,32 @@ function addPin(req,res){
         }
         res.json({ status: "added NewPinnedQuestions" });
     });
-
 }
 
-function getPinned(req,res){
-
+function getPinned(req, res) {
     pinnedQuestions.find({}, function (err, data) {
         if (err) {
             res.status(500).json({ status: "error", message: err });
         }
         res.json(data);
     });
+}
 
+function deletePinned(req, res) {
+    var id = req.body._id;
+    var rUserID = req.body.UserID
+    pinnedQuestions.findOne({ _id:id,UserID:rUserID}, function (err, data) {
+
+        if (data != null) {
+        pinnedQuestions.findByIdAndRemove(id, function (err) {
+            if (err) res.status(500).json(err);
+            res.json({ status: "delete a pinned" });
+        });
+        }else{
+            res.json({ status: "permisison denied" });
+        }
+
+    });
 }
 
 
@@ -404,6 +417,7 @@ module.exports = {
     viewFrequency: viewFrequency,
     searchingFrequency: searchingFrequency,
     //Pinned Function
-    addPin:addPin,
-    getPinned:getPinned
+    addPin: addPin,
+    getPinned: getPinned,
+    deletePinned:deletePinned
 };

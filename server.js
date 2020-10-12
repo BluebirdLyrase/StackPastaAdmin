@@ -102,8 +102,7 @@ router.get('/searchingFrequency',api.searchingFrequency)
 // all of our routes will be prefixed with /api
 router.post('/addPin',api.addPin);
 router.get('/getPinned',api.getPinned);
-
-
+router.delete('/deletePinned',api.deletePinned);
 
 app.use('/api', cors(), router);
 

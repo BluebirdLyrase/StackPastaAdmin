@@ -36,7 +36,7 @@ $(function () {
           data: data,
           columns: [
             { data: 'UserID' },
-            { data: 'Password' },
+            // { data: 'Password' },
             { data: 'type' },
             {
               data: '_id', render: function (data, type, row, meta) {
