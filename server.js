@@ -101,8 +101,11 @@ router.get('/searchingFrequency',api.searchingFrequency)
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 router.post('/addPin',api.addPin);
-router.get('/getPinned',api.getPinned);
+router.get('/PinQuestion',api.getPinned);
 router.delete('/deletePinned',api.deletePinned);
+
+//this delete use by admin only
+router.delete('/PinQuestion/:id',api.deletePinnedByAdmin);
 
 app.use('/api', cors(), router);
 

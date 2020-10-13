@@ -353,10 +353,10 @@ function addPin(req, res) {
     console.log(NewPinnedQuestions);
     NewPinnedQuestions.save(function (err) {
         if (err) {
-            res.status(500).json(err);
+            res.status(500).send("Error while try to add New PinnedQuestions");
             console.log(err);
         }
-        res.json({ status: "added NewPinnedQuestions" });
+        res.send("Successfully added New PinnedQuestions");
     });
 }
 
@@ -365,7 +365,8 @@ function getPinned(req, res) {
         if (err) {
             res.status(500).json({ status: "error", message: err });
         }
-        res.json(data);
+           response =   { "item": data}
+        res.json(response);
     });
 }
 
@@ -376,14 +377,27 @@ function deletePinned(req, res) {
 
         if (data != null) {
         pinnedQuestions.findByIdAndRemove(id, function (err) {
-            if (err) res.status(500).json(err);
-            res.json({ status: "delete a pinned" });
+            if (err) {
+                res.status(500).json(err);
+                res.send("Successfully deleted pinned Error" + err);
+            }
+            res.send("Successfully deleted a pinned");
         });
         }else{
-            res.json({ status: "permisison denied" });
+            res.send("permisison denied" );
         }
 
     });
+}
+
+function deletePinnedByAdmin(req,res){
+    var id =  req.params.id;
+        pinnedQuestions.findByIdAndRemove(id, function (err,data) {
+            if (err){
+                res.status(500).json(err);
+            }
+            res.send("delete a pinned by Admin "+data);
+        });
 }
 
 
@@ -419,5 +433,6 @@ module.exports = {
     //Pinned Function
     addPin: addPin,
     getPinned: getPinned,
-    deletePinned:deletePinned
+    deletePinned:deletePinned,
+    deletePinnedByAdmin:deletePinnedByAdmin
 };
