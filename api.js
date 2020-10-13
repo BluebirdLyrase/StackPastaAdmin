@@ -353,10 +353,10 @@ function addPin(req, res) {
     console.log(NewPinnedQuestions);
     NewPinnedQuestions.save(function (err) {
         if (err) {
-            res.status(500).send("Error while try to add New PinnedQuestions");
+            res.status(500).send("Error while try to add New Pinned Questions");
             console.log(err);
         }
-        res.send("Successfully added New PinnedQuestions");
+        res.send("Successfully added New Pinned Questions");
     });
 }
 
