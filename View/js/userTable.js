@@ -63,7 +63,7 @@ $.get(url+id, function (data, status) {
   
   $("#Editmodal-title").append("Edit User : "+data.UserID)
   $("#useridEdit").attr("value",data.UserID)
-  $("#passwordEdit").attr("value",data.Password)
+  // $("#passwordEdit").attr("value",data.Password)
   $("#typeEdit").val(data.type);
   $("#edituser").attr("onclick","editUser(`" + id + "`,`" + data.UserID + "`)")
   $('#editModal').modal('toggle');

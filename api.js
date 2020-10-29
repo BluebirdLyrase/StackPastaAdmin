@@ -153,11 +153,38 @@ function editUser(req, res) {
         payload.Password = hash;
 
         console.log(payload)
-        user.findByIdAndUpdate(id, payload, function (err) {
+        user.findByIdAndUpdate(id, payload, function (err,oldData) {
+
+            //Update other data
+            //viewHistory
+            console.log("oldUserID : "+oldData.UserID)
+            viewHistory.find({ UserID: oldData.UserID }, function (err, data) {
+                data.forEach(function (item) {
+                    
+                    var newItem = item;
+                    newItem.UserID = payload.UserID ;
+                    viewHistory.findByIdAndUpdate(item._id, newItem, 
+                        function () {
+                            console.log(newItem.UserID + " viewHistory change in"+item._id);
+                    });
+                });
+            });
+            // searchingHistory
+            searchingHistory.find({ UserID: oldData.UserID }, function (err, data) {
+                data.forEach(function (item) {
+                    
+                    var newItem = item;
+                    newItem.UserID = payload.UserID ;
+                    searchingHistory.findByIdAndUpdate(item._id, newItem, 
+                        function () {
+                            console.log(newItem.UserID + " searchingHistory change in"+item._id);
+                    });
+                });
+            });
+
             if (err) res.status(500).json(err);
             res.json({ status: "updated user" });
         });
-
     });
 
 }
@@ -365,7 +392,7 @@ function getPinned(req, res) {
         if (err) {
             res.status(500).json({ status: "error", message: err });
         }
-           response =   { "item": data}
+        response = { "item": data }
         res.json(response);
     });
 }
@@ -373,31 +400,31 @@ function getPinned(req, res) {
 function deletePinned(req, res) {
     var id = req.body._id;
     var rUserID = req.body.UserID
-    pinnedQuestions.findOne({ _id:id,UserID:rUserID}, function (err, data) {
+    pinnedQuestions.findOne({ _id: id, UserID: rUserID }, function (err, data) {
 
         if (data != null) {
-        pinnedQuestions.findByIdAndRemove(id, function (err) {
-            if (err) {
-                res.status(500).json(err);
-                res.send("Successfully deleted pinned Error" + err);
-            }
-            res.send("Successfully deleted a pinned");
-        });
-        }else{
-            res.send("permisison denied" );
+            pinnedQuestions.findByIdAndRemove(id, function (err) {
+                if (err) {
+                    res.status(500).json(err);
+                    res.send("Successfully deleted pinned Error" + err);
+                }
+                res.send("Successfully deleted a pinned");
+            });
+        } else {
+            res.send("permisison denied");
         }
 
     });
 }
 
-function deletePinnedByAdmin(req,res){
-    var id =  req.params.id;
-        pinnedQuestions.findByIdAndRemove(id, function (err,data) {
-            if (err){
-                res.status(500).json(err);
-            }
-            res.send("delete a pinned by Admin "+data);
-        });
+function deletePinnedByAdmin(req, res) {
+    var id = req.params.id;
+    pinnedQuestions.findByIdAndRemove(id, function (err, data) {
+        if (err) {
+            res.status(500).json(err);
+        }
+        res.send("delete a pinned by Admin " + data);
+    });
 }
 
 
@@ -433,6 +460,6 @@ module.exports = {
     //Pinned Function
     addPin: addPin,
     getPinned: getPinned,
-    deletePinned:deletePinned,
-    deletePinnedByAdmin:deletePinnedByAdmin
+    deletePinned: deletePinned,
+    deletePinnedByAdmin: deletePinnedByAdmin
 };
