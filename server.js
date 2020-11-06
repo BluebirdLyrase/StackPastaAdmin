@@ -38,17 +38,22 @@ router.get('/user/:id',api.getOneUser)
 //add Data
 router.post('/addViewHistory',api.addViewHistory);
 router.post('/addSearchingHistory',api.addSearchingHistory)
-router.post('/addUser',api.addUser)
 router.post('/addDefaultAdmin',api.addDefaultAdmin)
 
 //delete Data
 router.delete('/viewHistory/:id',api.deleteViewHistory)
 router.delete('/searchingHistory/:id',api.deleteSearchingHistory)
-router.delete('/user/:id',api.deleteUser)
+
 
 //User Management
 router.put('/user/:id',api.editUser)
 router.post('/user/:userid',api.findUser)
+router.post('/addUser',api.addUser)
+router.delete('/user/:id',api.RemoveUser)
+router.post('/user/deleteUser/:id',api.deleteUser)
+router.post('/user/recoverUser/:id',api.RecoverUser)
+
+
 
 //Connection with plugin
 router.post('/authen',api.authen)

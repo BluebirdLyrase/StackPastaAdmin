@@ -2,34 +2,35 @@ var url = "/api/user/";
 $(function () {
 
   var sUserID = sessionStorage.getItem("userID");
-  var sPassword=  sessionStorage.getItem("password");
- 
-      var authen = {
-        UserID: sUserID,
-        Password: sPassword
-      }
+  var sPassword = sessionStorage.getItem("password");
 
-      $.ajax({
-        url: "api/authenAdmin",
-        type: 'POST',
-        data: authen,
-        success: function (result) {
-          if(!result){
-          sessionStorage.setItem("session", "user.html");
-          window.location.href = "login.html";
-         }
-        }
-      });
+  var authen = {
+    UserID: sUserID,
+    Password: sPassword
+  }
+
+  $.ajax({
+    url: "api/authenAdmin",
+    type: 'POST',
+    data: authen,
+    success: function (result) {
+      if (!result) {
+        sessionStorage.setItem("session", "user.html");
+        window.location.href = "login.html";
+      }
+    }
+  });
 
 
 
 
 
   // Get data when first time open
-  $.get(url, function (data, status) { 
+  $.get(url, function (data, status) {
     if (status == 'success') {
-      console.log(data);
+      // console.log(data);
       $(data).ready(function () {
+        var userStatus;
         $('#dataTable').DataTable({
           destroy: true,
           searching: true,
@@ -39,10 +40,36 @@ $(function () {
             // { data: 'Password' },
             { data: 'type' },
             {
-              data: '_id', render: function (data, type, row, meta) {
+              data: 'available', render: function (data, type) {
+                var statusText;
+                userStatus = data;
+                if (data) {
+                  statusText = "<div class='text-success'>Available</div>";
+                } else {
+                  statusText = "<div class='text-danger'>Deleted</div>";
+                }
                 return type === 'display' ?
-                  '<botton onclick="Delete(`' + data + '`)" class="btn btn-danger" >Delete</botton> '
-                  + '<botton onclick="Edit(`' + data + '`)" class="btn btn-primary" >Edit</botton>'
+                  statusText
+                  : data;
+              }
+            },
+            {
+              data: '_id', render: function (data, type, row, meta) {
+                var buttonText = '<botton onclick="Edit(`' + data + '`)" class="btn btn-primary" >Edit</botton>   '
+
+                buttonText = buttonText +
+                  '<botton onclick="RemoveData(`' + data + '`)" class="btn btn-warning" >Remove Data</botton> '
+
+                if (userStatus) {
+                  buttonText = buttonText +
+                    '<botton onclick="Delete(`' + data + '`)" class="btn btn-danger" >Delete</botton> '
+                }else{
+                  buttonText = buttonText +
+                    '<botton onclick="Recover(`' + data + '`)" class="btn btn-success" >Recover</botton> '
+                }
+
+                return type === 'display' ?
+                  buttonText
                   : data;
               }
             },
@@ -53,40 +80,40 @@ $(function () {
   });
 });
 
-function Edit(id){
-console.log("editclick : "+id+"::")
-$("#Editmodal-title").empty()
-$("#useridEdit").empty()
-$("#passwordEdit").empty()
+function Edit(id) {
+  console.log("editclick : " + id + "::")
+  $("#Editmodal-title").empty()
+  $("#useridEdit").empty()
+  $("#passwordEdit").empty()
 
-$.get(url+id, function (data, status) {
-  
-  $("#Editmodal-title").append("Edit User : "+data.UserID)
-  $("#useridEdit").attr("value",data.UserID)
-  // $("#passwordEdit").attr("value",data.Password)
-  $("#typeEdit").val(data.type);
-  $("#edituser").attr("onclick","editUser(`" + id + "`,`" + data.UserID + "`)")
-  $('#editModal').modal('toggle');
+  $.get(url + id, function (data, status) {
 
-});
+    $("#Editmodal-title").append("Edit User : " + data.UserID)
+    $("#useridEdit").attr("value", data.UserID)
+    // $("#passwordEdit").attr("value",data.Password)
+    $("#typeEdit").val(data.type);
+    $("#edituser").attr("onclick", "editUser(`" + id + "`,`" + data.UserID + "`)")
+    $('#editModal').modal('toggle');
+
+  });
 
 }
 
-function editUser(id,Userid){
+function editUser(id, Userid) {
 
-  var newUserID =  $("#useridEdit").val();
-  var newPassword =  $("#passwordEdit").val();
+  var newUserID = $("#useridEdit").val();
+  var newPassword = $("#passwordEdit").val();
   var newType = $("#typeEdit").val();
 
-  if(newUserID==Userid){
+  if (newUserID == Userid) {
     console.log("not change userID");
-    saveUser(id,newUserID,newPassword,newType);
-  }else{
+    saveUser(id, newUserID, newPassword, newType);
+  } else {
 
     $.post(url + newUserID, function (data, status) {
       if (!data) {
-        saveUser(id,newUserID,newPassword,newType);
-      }else{
+        saveUser(id, newUserID, newPassword, newType);
+      } else {
         $('#alertModal').modal('toggle');
         console.log("Duplicate UserID")
       }
@@ -96,7 +123,7 @@ function editUser(id,Userid){
 
 }
 
-function saveUser(id,newUserID,newPassword,newType){
+function saveUser(id, newUserID, newPassword, newType) {
 
   var editeduser = {
     _id: id,
@@ -106,7 +133,7 @@ function saveUser(id,newUserID,newPassword,newType){
   }
   console.log("add new ");
   $.ajax({
-    url: url+id,
+    url: url + id,
     type: 'PUT',
     data: editeduser,
     success: function (result) {
@@ -121,6 +148,34 @@ function Delete(id) {
   $("#confirmdelete").click(function () {
     console.log("delete " + id);
     $.ajax({
+      url: url +"deleteUser/"+ id,
+      type: 'POST',
+      success: function (result) {
+        window.location.href = "user.html";
+      }
+    });
+  });
+}
+
+function Recover(id) {
+  $('#confirmRecoverModal').modal('toggle');
+  $("#confirmRecover").click(function () {
+    console.log("recovered " + id);
+    $.ajax({
+      url: url + "recoverUser/" + id,
+      type: 'POST',
+      success: function (result) {
+        window.location.href = "user.html";
+      }
+    });
+  });
+}
+
+function RemoveData(id){
+  $('#confirmRemoveModal').modal('toggle');
+  $("#confirmRemove").click(function () {
+    console.log("recovered " + id);
+    $.ajax({
       url: url + id,
       type: 'DELETE',
       success: function (result) {
@@ -130,7 +185,7 @@ function Delete(id) {
   });
 }
 
-$("#adduser").click(function() {
+$("#adduser").click(function () {
   console.log("addclick")
   $('#addModal').modal('toggle');
 });

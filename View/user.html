@@ -59,6 +59,7 @@
                     <th>UserID</th>
                     <!-- <th>Password</th> -->
                     <th>User Type</th>
+                    <th>Status</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -68,6 +69,7 @@
                     <th>UserID</th>
                     <!-- <th>Password</th> -->
                     <th>User Type</th>
+                    <th>Status</th>
                     <th></th>
                   </tr>
                 </tfoot>
@@ -86,7 +88,7 @@
 
         <!-- End of Main Content -->
 
-        <!-- Confirm Modal -->
+        <!-- Confirm Delete Modal -->
         <div class="modal" id="confirmModal">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -99,14 +101,69 @@
 
               <!-- Modal body -->
               <div class="modal-body" id="modalbody">
-                Are you sure to delete this record ?
+                Are you sure to delete this user ?
               </div>
 
               <!-- Modal footer -->
               <div class="modal-footer">
                 <button type="button" id="confirmdelete" class="btn btn-danger" data-dismiss="modal">Confirm
                   Delete</button>
-                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm Recover Modal -->
+        <div class="modal" id="confirmRecoverModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Confirm recovering</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body" id="modalbody">
+                Are you sure to recover this user ?
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" id="confirmRecover" class="btn btn-danger" data-dismiss="modal">Confirm
+                  Recover</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm Remove Data Modal -->
+        <div class="modal" id="confirmRemoveModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Confirm Remove All user Data</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body" id="modalbody">
+                Are you sure to remove all user data ?
+                this will also remove all viewhistories and searchinghistories related to this user!
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" id="confirmRemove" class="btn btn-danger" data-dismiss="modal">Confirm
+                  Remove</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
               </div>
 
             </div>
@@ -170,7 +227,8 @@
               <div class="modal-body">
                 <div class="form-group">
                   <label for="">UserID</label>
-                  <input type="text" class="form-control" name="" id="useridEdit" aria-describedby="helpId" placeholder="">
+                  <input type="text" class="form-control" name="" id="useridEdit" aria-describedby="helpId"
+                    placeholder="">
                   <small id="helpId" class="form-text text-muted">Specify name of user</small>
                 </div>
                 <div class="form-group">
@@ -191,7 +249,8 @@
 
               <!-- Modal footer -->
               <div class="modal-footer" id="modal-footer">
-                <button type="button" id="edituser" onclick="" class="btn btn-primary" data-dismiss="modal">Save</button>
+                <button type="button" id="edituser" onclick="" class="btn btn-primary"
+                  data-dismiss="modal">Save</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
 
@@ -270,7 +329,7 @@
                   <a class="nav-link" href="PinnedQuestion.html">Pinned Question
                   </a>
                 </li>
-                
+
               </ul>
             </div>
           </div>

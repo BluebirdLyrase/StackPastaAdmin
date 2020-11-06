@@ -92,6 +92,7 @@ function addUser(req, res) {
     var newId = new mongoose.mongo.ObjectId();
     var payload = req.body;
     payload._id = newId; // add _id
+    payload.available = true;
 
     bcrypt.hash(payload.Password, saltRounds, function (err, hash) {
         payload.Password = hash;
@@ -217,11 +218,33 @@ function addDefaultAdmin(req, res) {
 
 }
 
+function RemoveUser(req, res) {
+    var id = req.params.id;
+    user.findByIdAndRemove(id, function (err,data) {
+        if (err) res.status(500).json(err);
+
+        viewHistory.find({ UserID: data.UserID}).remove().exec();
+        searchingHistory.find({ UserID: data.UserID}).remove().exec();
+
+        res.json({ status: "delete a user data : " + data.UserID});
+    });
+    // ===============================
+}
+
 function deleteUser(req, res) {
     var id = req.params.id;
-    user.findByIdAndRemove(id, function (err) {
+    user.findByIdAndUpdate(id,{"available":false}, function (err) {
         if (err) res.status(500).json(err);
-        res.json({ status: "delete a data" });
+        res.json({ status: "deleted a user" });
+    });
+    // ===============================
+}
+
+function RecoverUser(req, res) {
+    var id = req.params.id;
+    user.findByIdAndUpdate(id,{"available":true}, function (err) {
+        if (err) res.status(500).json(err);
+        res.json({ status: "recovered a user" });
     });
     // ===============================
 }
@@ -229,8 +252,8 @@ function deleteUser(req, res) {
 //Connection and authen
 
 function authen(req, res) {
-    //TODO Verification
-    user.findOne({ UserID: req.body.UserID }, function (err, data) {
+
+    user.findOne({ UserID: req.body.UserID,available: true }, function (err, data) {
         // console.log(req)
         if (err) {
             res.status(500).json({ status: "error", message: err });
@@ -437,12 +460,14 @@ module.exports = {
     //add History
     addViewHistory: addViewHistory,
     addSearchingHistory: addSearchingHistory,
-    //User 
+    //User Management
     addUser: addUser,
     findUser: findUser,
     editUser: editUser,
     addDefaultAdmin: addDefaultAdmin,
     deleteUser: deleteUser,
+    RecoverUser:RecoverUser,
+    RemoveUser:RemoveUser,
     //Delete History
     deleteViewHistory: deleteViewHistory,
     deleteSearchingHistory: deleteSearchingHistory,
