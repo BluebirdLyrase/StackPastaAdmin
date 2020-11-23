@@ -262,7 +262,7 @@ function authen(req, res) {
         if (data != null) {
 
             bcrypt.compare(req.body.Password, data.Password, function (err, result) {
-                console.log(result);
+                console.log("authen : "+result);
                 res.json(result);
             });
 
