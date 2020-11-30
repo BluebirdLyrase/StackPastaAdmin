@@ -200,7 +200,8 @@ function addDefaultAdmin(req, res) {
                     _id: newId,
                     UserID: "admin",
                     Password: hash,
-                    type: "admin"
+                    type: "admin",
+                    available : true
                 });
                 console.log(NewUser);
                 NewUser.save(function (err) {
