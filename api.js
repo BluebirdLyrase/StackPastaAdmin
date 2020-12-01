@@ -238,6 +238,7 @@ function RemoveUser(req, res) {
 
         viewHistory.find({ UserID: data.UserID}).remove().exec();
         searchingHistory.find({ UserID: data.UserID}).remove().exec();
+        pinnedQuestions.find({ UserID: data.UserID}).remove().exec();
 
         res.json({ status: "delete a user data : " + data.UserID});
     });

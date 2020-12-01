@@ -58,14 +58,14 @@ $(function () {
                 var buttonText = '<botton onclick="Edit(`' + data + '`)" class="btn btn-primary" >Edit</botton>   '
 
                 buttonText = buttonText +
-                  '<botton onclick="RemoveData(`' + data + '`)" class="btn btn-warning" >Remove Data</botton> '
+                  '<botton title="Remove user and all data (searching history, view history, and pin) by user" onclick="RemoveData(`' + data + '`)" class="btn btn-warning" >Remove Data</botton> '
 
                 if (userStatus) {
                   buttonText = buttonText +
-                    '<botton onclick="Delete(`' + data + '`)" class="btn btn-danger" >Delete</botton> '
+                    '<botton title="Change user status to Deleted, Deleted user can not login to stack pasta plugin or extension" onclick="Delete(`' + data + '`)" class="btn btn-danger" >Delete</botton> '
                 }else{
                   buttonText = buttonText +
-                    '<botton onclick="Recover(`' + data + '`)" class="btn btn-success" >Recover</botton> '
+                    '<botton title="Change user status to Available" onclick="Recover(`' + data + '`)" class="btn btn-success" >Recover</botton> '
                 }
 
                 return type === 'display' ?
