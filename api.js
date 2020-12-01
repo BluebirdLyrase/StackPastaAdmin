@@ -183,6 +183,18 @@ function editUser(req, res) {
                 });
             });
 
+            // pinned
+            pinnedQuestions.find({ UserID: oldData.UserID }, function (err, data) {
+                data.forEach(function (item) {
+                    var newItem = item;
+                    newItem.UserID = payload.UserID ;
+                    pinnedQuestions.findByIdAndUpdate(item._id, newItem, 
+                        function () {
+                            console.log(newItem.UserID + " searchingHistory change in"+item._id);
+                    });
+                });
+            });
+
             if (err) res.status(500).json(err);
             res.json({ status: "updated user" });
         });
